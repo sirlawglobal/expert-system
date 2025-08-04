@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech Support Expert System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🛠 Tech Support Expert System</h1>
+    <p>Select the issues you're experiencing below:</p>
+    <form id="symptom-form">
+      <div class="checkbox-group">
+        <label><input type="checkbox" value="computer not turning on"> Computer not turning on</label>
+        <label><input type="checkbox" value="no power light"> No power light</label>
+        <label><input type="checkbox" value="slow performance"> Slow performance</label>
+        <label><input type="checkbox" value="freezing"> Freezing</label>
+        <label><input type="checkbox" value="internet not working"> Internet not working</label>
+        <label><input type="checkbox" value="wifi not connected"> Wi-Fi not connected</label>
+        <label><input type="checkbox" value="blue screen"> Blue screen</label>
+        <label><input type="checkbox" value="auto restart"> Auto restart</label>
+      </div>
+      <button type="submit" class="btn">Diagnose</button>
+    </form>
+  </div>
+
+  <!-- Modal -->
+  <div id="solution-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>🔍 Expert Recommendation</h2>
+      <p id="modal-text"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
