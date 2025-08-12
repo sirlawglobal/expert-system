@@ -17,11 +17,26 @@ form.addEventListener('submit', async function (e) {
   }
 
   try {
-    const response = await fetch('http://localhost:4000/api/support', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ symptoms: selectedSymptoms })
-    });
+    // const response = await fetch('http://localhost:4000/api/support', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ symptoms: selectedSymptoms })
+    // });
+
+    const API_BASE_URL = window.location.hostname.includes('localhost')
+  ? 'http://localhost:4000'
+  : 'https://expert-system-prbm.onrender.com';
+
+const response = await fetch(`${API_BASE_URL}/api/support`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ symptoms: selectedSymptoms })
+});
+
+
+
+
+
 
     const data = await response.json();
     modalText.innerHTML = data.solution;
