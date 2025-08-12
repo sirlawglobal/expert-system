@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tech Support Expert System</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif; }
+    h1 { text-align: center; }
+    .checkbox-group { margin: 20px 0; }
+    .category { margin-bottom: 10px; }
+    .category-header { cursor: pointer; background: #f4f4f4; padding: 10px; border-radius: 5px; font-weight: bold; }
+    .category-content { display: none; padding: 10px; }
+    .category-content.active { display: block; }
+    label { display: block; margin: 5px 0; }
+    .btn { background: #007BFF; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    .btn:hover { background: #0056b3; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+    .modal-content { background: white; margin: 15% auto; padding: 20px; max-width: 600px; border-radius: 5px; }
+    .close-btn { float: right; font-size: 20px; cursor: pointer; }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -12,14 +27,166 @@
     <p>Select the issues you're experiencing below:</p>
     <form id="symptom-form">
       <div class="checkbox-group">
-        <label><input type="checkbox" value="computer not turning on"> Computer not turning on</label>
-        <label><input type="checkbox" value="no power light"> No power light</label>
-        <label><input type="checkbox" value="slow performance"> Slow performance</label>
-        <label><input type="checkbox" value="freezing"> Freezing</label>
-        <label><input type="checkbox" value="internet not working"> Internet not working</label>
-        <label><input type="checkbox" value="wifi not connected"> Wi-Fi not connected</label>
-        <label><input type="checkbox" value="blue screen"> Blue screen</label>
-        <label><input type="checkbox" value="auto restart"> Auto restart</label>
+        <div class="category">
+          <div class="category-header">Power Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="computer not turning on"> Computer not turning on</label>
+            <label><input type="checkbox" value="no power light"> No power light</label>
+            <label><input type="checkbox" value="battery not charging"> Battery not charging</label>
+            <label><input type="checkbox" value="laptop shutting down quickly"> Laptop shutting down quickly</label>
+            <label><input type="checkbox" value="power button not working"> Power button not working</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Performance Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="slow performance"> Slow performance</label>
+            <label><input type="checkbox" value="freezing"> Freezing</label>
+            <label><input type="checkbox" value="high disk usage"> High disk usage</label>
+            <label><input type="checkbox" value="system crashes during games"> System crashes during games</label>
+            <label><input type="checkbox" value="high CPU usage"> High CPU usage</label>
+            <label><input type="checkbox" value="overclocking instability"> Overclocking instability</label>
+            <label><input type="checkbox" value="random reboots"> Random reboots</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Network Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="internet not working"> Internet not working</label>
+            <label><input type="checkbox" value="wifi not connected"> Wi-Fi not connected</label>
+            <label><input type="checkbox" value="WiFi dropping frequently"> Wi-Fi dropping frequently</label>
+            <label><input type="checkbox" value="Ethernet not connecting"> Ethernet not connecting</label>
+            <label><input type="checkbox" value="no LAN light"> No LAN light</label>
+            <label><input type="checkbox" value="file sharing not working"> File sharing not working</label>
+            <label><input type="checkbox" value="network discovery off"> Network discovery off</label>
+            <label><input type="checkbox" value="VPN connection failing"> VPN connection failing</label>
+            <label><input type="checkbox" value="authentication error"> Authentication error</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Display Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="no display on monitor"> No display on monitor</label>
+            <label><input type="checkbox" value="black screen"> Black screen</label>
+            <label><input type="checkbox" value="screen flickering"> Screen flickering</label>
+            <label><input type="checkbox" value="display artifacts"> Display artifacts</label>
+            <label><input type="checkbox" value="external monitor not detected"> External monitor not detected</label>
+            <label><input type="checkbox" value="no signal"> No signal</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Hardware Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="hard drive clicking noise"> Hard drive clicking noise</label>
+            <label><input type="checkbox" value="data not accessible"> Data not accessible</label>
+            <label><input type="checkbox" value="overheating"> Overheating</label>
+            <label><input type="checkbox" value="fan running loud"> Fan running loud</label>
+            <label><input type="checkbox" value="RAM errors"> RAM errors</label>
+            <label><input type="checkbox" value="random crashes"> Random crashes</label>
+            <label><input type="checkbox" value="CD/DVD drive not reading"> CD/DVD drive not reading</label>
+            <label><input type="checkbox" value="disc not ejecting"> Disc not ejecting</label>
+            <label><input type="checkbox" value="SSD not detected"> SSD not detected</label>
+            <label><input type="checkbox" value="boot device missing"> Boot device missing</label>
+            <label><input type="checkbox" value="laptop hinge loose"> Laptop hinge loose</label>
+            <label><input type="checkbox" value="screen wobbling"> Screen wobbling</label>
+            <label><input type="checkbox" value="RAID array degraded"> RAID array degraded</label>
+            <label><input type="checkbox" value="disk failure warning"> Disk failure warning</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Input Device Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="keyboard not responding"> Keyboard not responding</label>
+            <label><input type="checkbox" value="keys sticking"> Keys sticking</label>
+            <label><input type="checkbox" value="mouse not moving"> Mouse not moving</label>
+            <label><input type="checkbox" value="cursor frozen"> Cursor frozen</label>
+            <label><input type="checkbox" value="touchpad not working"> Touchpad not working</label>
+            <label><input type="checkbox" value="gestures unresponsive"> Gestures unresponsive</label>
+            <label><input type="checkbox" value="touchscreen unresponsive"> Touchscreen unresponsive</label>
+            <label><input type="checkbox" value="calibration issues"> Calibration issues</label>
+            <label><input type="checkbox" value="fingerprint scanner not working"> Fingerprint scanner not working</label>
+            <label><input type="checkbox" value="biometrics error"> Biometrics error</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Software Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="blue screen"> Blue screen</label>
+            <label><input type="checkbox" value="auto restart"> Auto restart</label>
+            <label><input type="checkbox" value="software not installing"> Software not installing</label>
+            <label><input type="checkbox" value="error code during setup"> Error code during setup</label>
+            <label><input type="checkbox" value="browser crashing"> Browser crashing</label>
+            <label><input type="checkbox" value="pages not loading"> Pages not loading</label>
+            <label><input type="checkbox" value="app crashing on launch"> App crashing on launch</label>
+            <label><input type="checkbox" value="compatibility issues"> Compatibility issues</label>
+            <label><input type="checkbox" value="system restore failing"> System restore failing</label>
+            <label><input type="checkbox" value="restore point corrupted"> Restore point corrupted</label>
+            <label><input type="checkbox" value="Windows update failing"> Windows update failing</label>
+            <label><input type="checkbox" value="error during installation"> Error during installation</label>
+            <label><input type="checkbox" value="virtual machine not starting"> Virtual machine not starting</label>
+            <label><input type="checkbox" value="hypervisor error"> Hypervisor error</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Peripheral Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="printer not printing"> Printer not printing</label>
+            <label><input type="checkbox" value="paper jam"> Paper jam</label>
+            <label><input type="checkbox" value="network printer offline"> Network printer offline</label>
+            <label><input type="checkbox" value="cannot find printer"> Cannot find printer</label>
+            <label><input type="checkbox" value="USB device not recognized"> USB device not recognized</label>
+            <label><input type="checkbox" value="port not working"> Port not working</label>
+            <label><input type="checkbox" value="webcam not detected"> Webcam not detected</label>
+            <label><input type="checkbox" value="video call issues"> Video call issues</label>
+            <label><input type="checkbox" value="no sound from speakers"> No sound from speakers</label>
+            <label><input type="checkbox" value="audio muted"> Audio muted</label>
+            <label><input type="checkbox" value="microphone not working"> Microphone not working</label>
+            <label><input type="checkbox" value="no audio input"> No audio input</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Security & Data Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="virus alerts"> Virus alerts</label>
+            <label><input type="checkbox" value="pop-ups appearing"> Pop-ups appearing</label>
+            <label><input type="checkbox" value="malware infection"> Malware infection</label>
+            <label><input type="checkbox" value="unwanted toolbars"> Unwanted toolbars</label>
+            <label><input type="checkbox" value="browser hijacking"> Browser hijacking</label>
+            <label><input type="checkbox" value="homepage changed"> Homepage changed</label>
+            <label><input type="checkbox" value="forgot password"> Forgot password</label>
+            <label><input type="checkbox" value="locked out of account"> Locked out of account</label>
+            <label><input type="checkbox" value="file corruption"> File corruption</label>
+            <label><input type="checkbox" value="cannot open documents"> Cannot open documents</label>
+            <label><input type="checkbox" value="hard drive full"> Hard drive full</label>
+            <label><input type="checkbox" value="low disk space warnings"> Low disk space warnings</label>
+            <label><input type="checkbox" value="backup failing"> Backup failing</label>
+            <label><input type="checkbox" value="insufficient space"> Insufficient space</label>
+            <label><input type="checkbox" value="cloud sync not working"> Cloud sync not working</label>
+            <label><input type="checkbox" value="files not updating"> Files not updating</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">System & Boot Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="startup programs too many"> Startup programs too many</label>
+            <label><input type="checkbox" value="slow boot time"> Slow boot time</label>
+            <label><input type="checkbox" value="error messages on boot"> Error messages on boot</label>
+            <label><input type="checkbox" value="BIOS beeps"> BIOS beeps</label>
+            <label><input type="checkbox" value="system time incorrect"> System time incorrect</label>
+            <label><input type="checkbox" value="clock resetting"> Clock resetting</label>
+          </div>
+        </div>
+        <div class="category">
+          <div class="category-header">Email & Connectivity Issues</div>
+          <div class="category-content">
+            <label><input type="checkbox" value="email not sending"> Email not sending</label>
+            <label><input type="checkbox" value="server error"> Server error</label>
+            <label><input type="checkbox" value="email attachments not opening"> Email attachments not opening</label>
+            <label><input type="checkbox" value="security block"> Security block</label>
+            <label><input type="checkbox" value="Bluetooth not connecting"> Bluetooth not connecting</label>
+            <label><input type="checkbox" value="devices not pairing"> Devices not pairing</label>
+          </div>
+        </div>
       </div>
       <button type="submit" class="btn">Diagnose</button>
     </form>
@@ -34,6 +201,26 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Toggle category content visibility
+    document.querySelectorAll('.category-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.classList.toggle('active');
+      });
+    });
+
+    // Modal functionality (unchanged from original)
+    const modal = document.getElementById('solution-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
